@@ -1,0 +1,302 @@
+/* ======================================================================
+   -b Design System — Colors & Type
+   Source: Brendbuk-proekta-b.pdf
+   ====================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ───── Brand Colors ─────────────────────────────────────────────── */
+  --b-electric-blue: #2B0AFF;   /* Primary accent — H1, CTAs, links */
+  --b-soft-indigo:   #6B4EFF;   /* Secondary — icons, hover, illustrations */
+  --b-deep-black:    #0A0A0A;   /* Primary surface, dark theme bg */
+  --b-pure-white:    #FFFFFF;   /* Light theme bg, max-contrast text */
+  --b-light-mist:    #F0EEFF;   /* Card / block backgrounds (light) */
+
+  /* ───── Extended Neutrals (extrapolated from brandbook screenshots) ── */
+  --b-ink-900: #0A0A0A;         /* Deep Black */
+  --b-ink-800: #111114;
+  --b-ink-700: #16161C;         /* Card surface on dark */
+  --b-ink-600: #1F1F28;
+  --b-ink-500: #2A2A36;         /* Hairline / divider on dark */
+  --b-ink-400: #4A4A5A;
+  --b-ink-300: #7A7A8A;         /* Muted text on dark */
+  --b-ink-200: #B8B8C4;
+  --b-ink-100: #E4E4EA;
+  --b-ink-050: #F6F6FA;
+
+  /* Indigo card backgrounds — used heavily in brandbook for mission/voice cards */
+  --b-indigo-card:    #1A1066;  /* Deep indigo card on black */
+  --b-indigo-card-2:  #150C55;  /* Darker variant */
+  --b-indigo-border:  #3A2BC2;  /* Card border accent */
+
+  /* ───── Semantic Status ─────────────────────────────────────────── */
+  --b-warn-bg:    #4A4416;      /* Olive callout (e.g. "Запрещено") */
+  --b-warn-fg:    #E8E07C;
+  --b-success-bg: #0F3A1E;      /* Green confirm callout */
+  --b-success-fg: #6FE093;
+  --b-info-bg:    var(--b-indigo-card);
+  --b-info-fg:    #C9BEFF;
+
+  /* ───── Foreground / Background tokens ──────────────────────────── */
+  --bg-primary:   var(--b-deep-black);
+  --bg-elevated: var(--b-ink-700);
+  --bg-card:      var(--b-indigo-card);
+  --bg-light:     var(--b-light-mist);
+
+  --fg-primary:   var(--b-pure-white);
+  --fg-secondary: var(--b-ink-200);
+  --fg-tertiary:  var(--b-ink-300);
+  --fg-accent:    var(--b-electric-blue);
+  --fg-accent-2:  var(--b-soft-indigo);
+  --fg-on-light:  var(--b-deep-black);
+
+  --border-subtle:  var(--b-ink-500);
+  --border-accent:  var(--b-indigo-border);
+
+  /* ───── Type families ──────────────────────────────────────────── */
+  --font-sans:    'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ───── Type scale (per brandbook: H1 48 / H2 32 / H3 24, line-height 1.5) ── */
+  --fs-h1: 48px;
+  --fs-h2: 32px;
+  --fs-h3: 24px;
+  --fs-h4: 20px;
+  --fs-body: 16px;
+  --fs-small: 14px;
+  --fs-micro: 12px;
+
+  --lh-tight:   1.15;
+  --lh-heading: 1.25;
+  --lh-body:    1.5;          /* brandbook standard */
+
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-black:    800;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+  --tracking-caps:   0.08em;
+
+  /* ───── Spacing — 4px base ─────────────────────────────────────── */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-20: 80px;
+  --sp-24: 96px;
+
+  /* ───── Radii ─────────────────────────────────────────────────── */
+  --r-sm:  6px;
+  --r-md:  10px;     /* default for cards / inputs */
+  --r-lg:  14px;     /* indigo callout cards */
+  --r-xl:  20px;
+  --r-pill: 999px;
+
+  /* ───── Shadows ───────────────────────────────────────────────── */
+  --shadow-sm:    0 1px 2px rgba(10,10,10,0.4);
+  --shadow-md:    0 8px 24px rgba(10,10,10,0.35);
+  --shadow-lg:    0 24px 64px rgba(10,10,10,0.5);
+  --shadow-glow:  0 0 0 1px rgba(43,10,255,0.5), 0 8px 32px rgba(43,10,255,0.35);
+  --shadow-soft:  0 4px 16px rgba(107,78,255,0.20);
+
+  /* ───── Motion ────────────────────────────────────────────────── */
+  --ease-standard: cubic-bezier(0.2, 0.0, 0, 1);
+  --ease-emph:     cubic-bezier(0.3, 0.0, 0.2, 1);
+  --dur-fast:   120ms;
+  --dur-base:   200ms;
+  --dur-slow:   320ms;
+}
+
+/* ===== Light theme overrides ===== */
+[data-theme="light"], .b-theme-light {
+  --bg-primary:   var(--b-pure-white);
+  --bg-elevated:  var(--b-light-mist);
+  --bg-card:      var(--b-light-mist);
+  --fg-primary:   var(--b-deep-black);
+  --fg-secondary: #2A2A36;
+  --fg-tertiary:  #5A5A6A;
+  --border-subtle: #E4E4EA;
+  --shadow-md:    0 8px 24px rgba(43,10,255,0.06);
+}
+
+/* ======================================================================
+   Semantic typography
+   ====================================================================== */
+
+.b-h1, h1.b {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-primary);
+  margin: 0;
+}
+
+.b-h2, h2.b {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-primary);
+  margin: 0;
+}
+
+.b-h3, h3.b {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+  color: var(--fg-primary);
+  margin: 0;
+}
+
+.b-h4, h4.b {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+  color: var(--fg-primary);
+  margin: 0;
+}
+
+.b-body, p.b {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+  color: var(--fg-secondary);
+  margin: 0;
+}
+
+.b-quote, blockquote.b {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-heading);
+  color: var(--fg-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.b-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--fg-accent-2);
+}
+
+.b-caption {
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  color: var(--fg-tertiary);
+  line-height: var(--lh-body);
+}
+
+.b-mono {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+}
+
+/* Accent inline highlight — the "Голос" / "-b" gradient-blue treatment */
+.b-accent { color: var(--fg-accent-2); }
+.b-accent-strong { color: var(--fg-accent); }
+
+/* ======================================================================
+   Common element primitives
+   ====================================================================== */
+
+.b-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--r-lg);
+  padding: var(--sp-5) var(--sp-6);
+  color: var(--fg-primary);
+}
+
+.b-card--surface {
+  background: var(--b-ink-700);
+  border: 1px solid var(--border-subtle);
+}
+
+.b-card--light {
+  background: var(--b-light-mist);
+  border: 1px solid #DCD6FF;
+  color: var(--b-deep-black);
+}
+
+.b-btn {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 12px 22px;
+  border-radius: var(--r-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--dur-base) var(--ease-standard),
+              transform var(--dur-fast) var(--ease-standard),
+              box-shadow var(--dur-base) var(--ease-standard);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.b-btn--primary {
+  background: var(--b-electric-blue);
+  color: var(--b-pure-white);
+}
+.b-btn--primary:hover { background: var(--b-soft-indigo); box-shadow: var(--shadow-soft); }
+.b-btn--primary:active { transform: scale(0.98); }
+.b-btn--primary[disabled], .b-btn--primary.is-disabled {
+  background: var(--b-ink-500); color: var(--b-ink-300); cursor: not-allowed;
+}
+
+.b-btn--ghost {
+  background: transparent;
+  color: var(--fg-primary);
+  border-color: var(--border-subtle);
+}
+.b-btn--ghost:hover { border-color: var(--b-soft-indigo); color: var(--b-soft-indigo); }
+
+.b-btn--light {
+  background: var(--b-pure-white);
+  color: var(--b-deep-black);
+}
+.b-btn--light:hover { background: var(--b-light-mist); }
+
+.b-input {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--b-ink-700);
+  color: var(--fg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-md);
+  outline: none;
+  transition: border-color var(--dur-base) var(--ease-standard),
+              box-shadow var(--dur-base) var(--ease-standard);
+}
+.b-input::placeholder { color: var(--b-ink-300); }
+.b-input:focus {
+  border-color: var(--b-soft-indigo);
+  box-shadow: 0 0 0 3px rgba(107,78,255,0.25);
+}
+
+.b-divider { height: 1px; background: var(--border-subtle); border: 0; }
