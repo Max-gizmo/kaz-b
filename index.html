@@ -69,6 +69,61 @@
   .nav-links a:hover { color: var(--b-soft-indigo); }
   @media (max-width: 760px) { .nav-links { display: none; } }
 
+  /* ── hamburger ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px; height: 40px;
+    padding: 6px;
+    background: none;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--r-md);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 100%; height: 2px;
+    background: var(--b-pure-white);
+    border-radius: 2px;
+    transition: transform 0.3s var(--ease-standard), opacity 0.3s;
+  }
+  .nav-hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  @media (max-width: 760px) {
+    .nav-hamburger { display: flex; }
+    .nav { position: relative; }
+    .nav-mobile { position: relative; top: 0; }
+  }
+
+  /* ── mobile nav drawer ── */
+  .nav-mobile {
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: rgba(10,10,10,0.97);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s var(--ease-standard), padding 0.3s;
+    z-index: 99;
+  }
+  .nav-mobile.is-open { max-height: 400px; padding: var(--sp-3) 0 var(--sp-5); }
+  .nav-mobile a {
+    font-size: 17px; font-weight: 600;
+    color: var(--fg-secondary);
+    padding: 12px clamp(20px, 6vw, 48px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: color var(--dur-fast) var(--ease-standard), background var(--dur-fast);
+  }
+  .nav-mobile a:last-child { border-bottom: none; }
+  .nav-mobile a:hover { color: var(--b-soft-indigo); background: rgba(107,78,255,0.06); }
+
   /* ───────────────────── 1. HERO ───────────────────── */
   .hero {
     position: relative;
@@ -84,9 +139,41 @@
     .hero { grid-template-columns: 1fr 0.8fr; }
   }
   @media (max-width: 760px) {
-    .hero { grid-template-columns: 1fr; padding-top: 84px; min-height: auto; }
-    .hero-image { order: -1; max-height: 50vh; }
-    .hero-image img { max-height: 50vh; }
+    .hero {
+      grid-template-columns: 1fr;
+      padding-top: 0;
+      min-height: auto;
+      gap: 0;
+    }
+    .hero-image {
+      order: -1;
+      height: 120vw;
+      max-height: 120vw;
+      overflow: hidden;
+      align-items: flex-start;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 120vw;
+      max-height: none;
+      object-fit: cover;
+      object-position: 50% 0%;
+    }
+    /* mobile button positions */
+    .cta-ball--overlay {
+      top: 27% !important;
+      right: 18% !important;
+      width: 112px !important;
+      height: 112px !important;
+    }
+    .cta-ball--overlay .label-2 { font-size: 15px; }
+    .cta-ball--overlay .label-1 { font-size: 10px; }
+    .music-btn--on-image {
+      top: 40% !important;
+      bottom: auto !important;
+      left: 16% !important;
+    }
+    .float-chip-1 { display: none; }
   }
   .hero::before {
     content: "";
@@ -943,8 +1030,20 @@
       <a href="#pricing">Цена</a>
       <a href="#contact">Контакты</a>
     </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-mobile" id="navMobile">
+  <a href="#why">Почему мы</a>
+  <a href="#tech">Технологии</a>
+  <a href="#why-not">Не для всех</a>
+  <a href="#pricing">Цена</a>
+  <a href="#contact">Контакты</a>
+</div>
 
 <!-- 1. HERO -->
 <section class="hero" id="hero" data-screen-label="01 Hero">
@@ -1346,6 +1445,22 @@ musicBtn.addEventListener('click', () => {
     document.getElementById('musicIcon').outerHTML = '<i data-lucide="play" id="musicIcon"></i>';
     lucide.createIcons();
   }
+});
+
+/* ============ HAMBURGER ============ */
+const hamburger = document.getElementById('hamburger');
+const navMobile = document.getElementById('navMobile');
+hamburger.addEventListener('click', () => {
+  const open = hamburger.classList.toggle('is-open');
+  navMobile.classList.toggle('is-open', open);
+  hamburger.setAttribute('aria-expanded', open);
+});
+navMobile.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('is-open');
+    navMobile.classList.remove('is-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  });
 });
 
 /* ============ CTA BALL — confetti + scroll to contact ============ */
