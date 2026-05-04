@@ -171,7 +171,7 @@
       inset -10px -16px 30px rgba(0,0,0,0.18),
       inset 10px 14px 24px rgba(255,255,255,0.55);
     transition: transform var(--dur-base) var(--ease-standard), box-shadow var(--dur-base) var(--ease-standard);
-    animation: ballFloat 4s ease-in-out infinite;
+    animation: ballPulse 2.4s ease-in-out infinite;
     cursor: pointer;
     flex-shrink: 0;
   }
@@ -183,9 +183,20 @@
       inset 10px 14px 24px rgba(255,255,255,0.6);
   }
   .cta-ball:active { transform: scale(0.98); }
-  @keyframes ballFloat {
-    0%, 100% { transform: translateY(0) rotate(-2deg); }
-    50% { transform: translateY(-10px) rotate(2deg); }
+  @keyframes ballPulse {
+    0%, 100% {
+      box-shadow:
+        0 18px 40px rgba(255,193,7,0.35),
+        inset -10px -16px 30px rgba(0,0,0,0.18),
+        inset 10px 14px 24px rgba(255,255,255,0.55);
+    }
+    50% {
+      box-shadow:
+        0 0 0 16px rgba(255,217,61,0.22),
+        0 0 55px rgba(255,193,7,0.75),
+        inset -10px -16px 30px rgba(0,0,0,0.18),
+        inset 10px 14px 24px rgba(255,255,255,0.55);
+    }
   }
   .cta-ball .label-1 { font-size: 16px; opacity: 0.8; letter-spacing: 0.1em; }
   .cta-ball .label-2 { font-size: 32px; line-height: 1; margin-top: 4px; }
@@ -245,21 +256,56 @@
   /* yellow ball positioned over the toy gun's ball in the photo */
   .cta-ball--overlay {
     position: absolute;
-    top: 8%;
-    right: 2%;
-    width: clamp(160px, 22vw, 240px);
-    height: clamp(160px, 22vw, 240px);
+    top: 7%;
+    right: 18%;
+    width: clamp(96px, 11vw, 130px);
+    height: clamp(96px, 11vw, 130px);
     z-index: 5;
   }
+  .cta-ball--overlay .label-1 { font-size: 10px; letter-spacing: 0.06em; }
+  .cta-ball--overlay .label-2 { font-size: 16px; margin-top: 2px; }
+  .cta-ball--overlay .arrow { width: 18px; height: 18px; margin-top: 4px; }
   @media (max-width: 760px) {
     .cta-ball--overlay {
       top: 4%;
       right: 4%;
-      width: 140px;
-      height: 140px;
+      width: 72px;
+      height: 72px;
     }
-    .cta-ball--overlay .label-2 { font-size: 22px; }
-    .cta-ball--overlay .label-1 { font-size: 12px; }
+    .cta-ball--overlay .label-2 { font-size: 13px; }
+    .cta-ball--overlay .label-1 { font-size: 9px; }
+  }
+
+  /* music button overlaid on hero image — just the icon, no circle */
+  .music-btn--on-image {
+    position: absolute;
+    bottom: 62%;
+    left: 21%;
+    z-index: 5;
+    width: 40px;
+    height: 40px;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--hero-yellow) !important;
+    animation: iconYellowPulse 1.8s ease-in-out infinite;
+    transition: filter var(--dur-base) var(--ease-standard);
+  }
+  @keyframes iconYellowPulse {
+    0%, 100% { filter: drop-shadow(0 0 4px rgba(255,193,7,0.5)); opacity: 0.9; }
+    50%       { filter: drop-shadow(0 0 14px rgba(255,193,7,1));  opacity: 1;   }
+  }
+  .music-btn--on-image i { width: 28px; height: 28px; }
+  .music-btn--on-image:hover {
+    filter: drop-shadow(0 0 18px rgba(255,193,7,1)) !important;
+  }
+  .music-btn--on-image.is-playing {
+    color: var(--hero-yellow) !important;
+    animation: iconYellowPulse 0.9s ease-in-out infinite;
+  }
+  .music-btn--on-image.is-playing::after { display: none; }
+  @media (max-width: 760px) {
+    .music-btn--on-image { bottom: 38%; left: 5%; }
   }
   .hero-image img {
     max-height: 92vh;
@@ -285,7 +331,7 @@
     animation: chipFloat 5s ease-in-out infinite;
   }
   .float-chip i { width: 16px; height: 16px; color: var(--b-soft-indigo); }
-  .float-chip-1 { top: 18%; right: 4%; animation-delay: 0s; }
+  .float-chip-1 { bottom: 25%; left: 56%; animation-delay: 0s; }
   .float-chip-2 { bottom: 24%; left: 38%; animation-delay: -2.5s; }
   @keyframes chipFloat {
     0%, 100% { transform: translateY(0); }
@@ -903,25 +949,20 @@
 <!-- 1. HERO -->
 <section class="hero" id="hero" data-screen-label="01 Hero">
   <div class="hero-content">
-    <span class="hero-eyebrow"><span class="dot"></span>сайты для тех, кто живой</span>
+    <span class="hero-eyebrow"><span class="dot"></span>живые сайты</span>
     <h1 class="hero-title">
       Сайты,<br/>
       от которых <span class="accent">не клонит</span><br/>
       <span class="yellow-mark">в сон.</span>
     </h1>
-    <p class="hero-sub">Делаем сайты для малого бизнеса и фрилансеров. Быстро, ярко и так, чтобы клиенты не закрывали вкладку через 4 секунды.</p>
-    <div class="hero-actions">
-      <div style="display:flex; align-items:center; gap:14px;">
-        <button class="music-btn" id="musicBtn" aria-label="Включить музыку">
-          <i data-lucide="play" id="musicIcon"></i>
-        </button>
-        <span class="music-label" id="musicLabel">Включить<br/>Progressive House</span>
-      </div>
-    </div>
+    <p class="hero-sub">Делаем сайты для малого бизнеса и фрилансеров. Быстро, ярко и мощно!</p>
   </div>
 
   <div class="hero-image">
     <img src="assets/heroes.png" alt="Команда -b" />
+    <button class="music-btn music-btn--on-image" id="musicBtn" aria-label="Включить музыку">
+      <i data-lucide="play" id="musicIcon"></i>
+    </button>
     <button class="cta-ball cta-ball--overlay" id="ctaBall" aria-label="Хочу сайт">
       <span class="label-1">нажми →</span>
       <span class="label-2">Хочу сайт</span>
@@ -929,8 +970,7 @@
     </button>
   </div>
 
-  <span class="float-chip float-chip-1"><i data-lucide="zap"></i>10 дней до запуска</span>
-  <span class="float-chip float-chip-2"><i data-lucide="heart"></i>в тапочках с зайчиками</span>
+  <span class="float-chip float-chip-1"><i data-lucide="zap"></i>1 день до запуска</span>
 </section>
 
 <!-- 2. WHY US -->
@@ -1253,10 +1293,10 @@
   </div>
 </section>
 
-<!-- ───────── BG MUSIC (royalty-free progressive house chord loop, low volume) ───────── -->
-<audio id="bgAudio" loop preload="none">
-  <source src="https://cdn.pixabay.com/audio/2022/10/30/audio_347111d654.mp3" type="audio/mpeg" />
-</audio>
+<!-- Hidden YouTube player container -->
+<div style="position:fixed;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;top:0;left:0;" aria-hidden="true">
+  <div id="ytPlayer"></div>
+</div>
 
 <script>
 /* ============ ICONS ============ */
@@ -1268,31 +1308,43 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('is-scrolled', window.scrollY > 8);
 });
 
-/* ============ MUSIC TOGGLE ============ */
+/* ============ YOUTUBE MUSIC ============ */
+var ytPlayer, ytReady = false, ytPendingPlay = false;
+window.onYouTubeIframeAPIReady = function() {
+  ytPlayer = new YT.Player('ytPlayer', {
+    height: '1', width: '1',
+    videoId: '_9VBWSVTZh8',
+    playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: '_9VBWSVTZh8', rel: 0 },
+    events: {
+      onReady: function() {
+        ytReady = true;
+        ytPlayer.setVolume(60);
+        if (ytPendingPlay) { ytPlayer.playVideo(); ytPendingPlay = false; }
+      }
+    }
+  });
+};
+(function() {
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+})();
+
 const musicBtn = document.getElementById('musicBtn');
-const musicIcon = document.getElementById('musicIcon');
-const musicLabel = document.getElementById('musicLabel');
-const audio = document.getElementById('bgAudio');
-audio.volume = 0.45;
-let playing = false;
+let musicPlaying = false;
 musicBtn.addEventListener('click', () => {
-  if (!playing) {
-    audio.play().then(() => {
-      playing = true;
-      musicBtn.classList.add('is-playing');
-      musicIcon.outerHTML = '<i data-lucide="pause" id="musicIcon"></i>';
-      lucide.createIcons();
-      musicLabel.innerHTML = 'Идёт танец под<br/>Progressive House';
-    }).catch((e) => {
-      musicLabel.innerHTML = 'Ой, браузер не дал.<br/>Попробуйте ещё раз';
-    });
+  if (!musicPlaying) {
+    if (ytReady) { ytPlayer.playVideo(); } else { ytPendingPlay = true; }
+    musicPlaying = true;
+    musicBtn.classList.add('is-playing');
+    document.getElementById('musicIcon').outerHTML = '<i data-lucide="pause" id="musicIcon"></i>';
+    lucide.createIcons();
   } else {
-    audio.pause();
-    playing = false;
+    if (ytReady) ytPlayer.pauseVideo();
+    musicPlaying = false;
     musicBtn.classList.remove('is-playing');
     document.getElementById('musicIcon').outerHTML = '<i data-lucide="play" id="musicIcon"></i>';
     lucide.createIcons();
-    musicLabel.innerHTML = 'Включить<br/>Progressive House';
   }
 });
 
